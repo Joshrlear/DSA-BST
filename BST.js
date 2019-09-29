@@ -31,7 +31,7 @@ class BST {
 
     find(key) {
         // this nodes key matches
-        if (this.key == key) { return this.value }
+        if (this.key == key) { return {key: this.key, value: this.value} }
         // move to left if less and left exist
         else if (key < this.key && this.left) { return this.left.find(key) }        
         // move to right if greater and right exist
@@ -45,10 +45,10 @@ class BST {
             // has left & right child
             if (this.left && this.right) {
                 // define successor, replace with successor, then remove successor
-                const successor = this._findMin()
+                const successor = this.right._findMin()
                 this.key = successor.key
                 this. value = successor.value
-                successor.key.remove(successor.key)
+                successor.remove(successor.key)
             }
             // only left child
             else if (this.left) { this._replaceWith(this.left) }
@@ -95,3 +95,5 @@ class BST {
         return this.left._findMin()
     }
 }
+
+module.exports = BST;
